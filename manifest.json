@@ -1,1 +1,17 @@
-something on my new branch
+
+{
+  "manifest_version": 2,
+
+  "name": "Timer Extension",
+  "description": "This extension will record the amount of time spent on each website",
+  "version": "1.0",
+
+  "browser_action": {
+   "default_icon": "icon.png",
+   "default_popup": "timer.html"
+  },
+  "permissions": [
+   "activeTab"
+   ]
+}
+
