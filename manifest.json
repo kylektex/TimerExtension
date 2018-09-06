@@ -5,13 +5,13 @@
   "name": "Timer Extension",
   "description": "This extension will record the amount of time spent on each website",
   "version": "1.0",
-
+/*
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com*" ],
       "js": ["content.js"]
     }
-  ],
+  ], */
 
   "browser_action": {
    "default_icon": "icon.png",
