@@ -11,6 +11,12 @@
    "default_popup": "popup.html"
   },
   "permissions": [
-   "activeTab"
-   ]
+   "activeTab",
+   "storage",
+   "tabs"
+ ],
+ "background": {
+    "scripts": ["content.js"],
+    "persistent": false
+  }
 }
