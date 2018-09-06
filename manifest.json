@@ -6,18 +6,18 @@
   "description": "This extension will record the amount of time spent on each website",
   "version": "1.0",
 
-  "content_scripts": [
-    {
-      "matches": ["https://www.youtube.com*" ],
-      "js": ["content.js"]
-    }
-  ],
+  "background": {
+    "scripts": ["content.js"],
+    "persistent": false
+  },
 
   "browser_action": {
    "default_icon": "icon.png",
    "default_popup": "popup.html"
   },
+
   "permissions": [
-   "activeTab"
+   "activeTab",
+   "tabs"
    ]
 }
