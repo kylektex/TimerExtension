@@ -1,42 +1,44 @@
-var h1 = document.getElementsByTagName('h1')[0],
-    start = document.getElementById('start'),
-    stop = document.getElementById('stop'),
-    clear = document.getElementById('clear'),
-    seconds = 0, minutes = 0, hours = 0,
-    t;
+console.log("content.js is running");
 
-function add() {
-    seconds++;
-    if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-        if (minutes >= 60) {
-            minutes = 0;
-            hours++;
-        }
-    }
+var value = "some data";
 
-    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+//storage stuff
+chrome.storage.sync.set({key: value}, function() {
+    console.log('Value is set to ' + value);
+});
+chrome.storage.sync.get(['key'], function(result) {
+    console.log('Value currently is ' + result.key);
+});
 
-    timer();
-}
+chrome.tabs.onUpdated.addListener(function() {
+  console.log("Tab updated.");
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+      var url = new URL(tabs[0].url);
+      console.log(url);
+      console.log("url hostname is "+ url.hostname);
+  });
+});
 
-function timer() {
-    t = setTimeout(add, 1000);
-}
-timer();
+chrome.tabs.onActivated.addListener(function() {
+  console.log("Tab activated.");
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+      var url = new URL(tabs[0].url);
+      console.log(url);
+      console.log("url hostname is "+ url.hostname);
+  });
+});
 
 
-/* Start button */
-//start.onclick = timer;
 
-/* Stop button */
-stop.onclick = function() {
-    clearTimeout(t);
-}
-
-/* Clear button */
-clear.onclick = function() {
-    h1.textContent = "00:00:00";
-    seconds = 0; minutes = 0; hours = 0;
-}
+// //var date = new Date();
+// //date.getTime() returns time in miliseconds since 1970
+//
+// //array
+// var log = [];
+//
+// //add new information
+// log.push({
+//   url: "",
+//   start: "", //date object
+//   end: "" //date object
+// })
