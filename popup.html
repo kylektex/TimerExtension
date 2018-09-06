@@ -1,6 +1,17 @@
 <!DOCTYPE html>
   <html>
 
+  <head>
+  <script>
+  	chrome.tabs.onUpdated.addListener(function callback) {
+  		
+  	}
+    function myFunction() {
+      document.getElementById("demo").innerHTML = "Paragraph changed.";
+    }
+  </script>
+  </head>
+
     <h1>Time spent on {{url}} <time>00:00:00</time></h1>
 
     <button id="start">start</button>
