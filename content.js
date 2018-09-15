@@ -50,9 +50,10 @@ chrome.tabs.onActivated.addListener(function() {
 function logTime(hostname, time) {
     //check if hostname key exists
 
-   chrome.storage.local.get([hostname], function(result) {
+   chrome.storage.local.get(hostname, function(result) {
       console.log("Value is "+ result.value);
       console.log("Key is "+ result.key);
+      console.log(typeof hostname);
       if(result.key == undefined) {
         chrome.storage.local.set({hostname: time}, function() {
             console.log("first time you left "+hostname+" created new key with a new time of "+ time);
