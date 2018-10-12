@@ -1,21 +1,8 @@
 <!DOCTYPE html>
   <html>
 
-  <head>
-  <script>
-  	chrome.tabs.onUpdated.addListener(function callback) {
-  		
-  	}
-    function myFunction() {
-      document.getElementById("demo").innerHTML = "Paragraph changed.";
-    }
-  </script>
-  </head>
 
-    <h1>Time spent on {{url}} <time>00:00:00</time></h1>
-
-    <button id="start">start</button>
-    <button id="stop">stop</button>
-    <button id="clear">clear</button>
-
+    <h1>Time spent on <span id="currentUrl"></span> is <span id="totalTime"></span></h1>
+    <button id="clickme">Button</button>
+  <script type="text/javascript" src="popup.js"></script>
 </html>

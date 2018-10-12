@@ -60,3 +60,7 @@ function logTime(hostname, time) {
     window.localStorage.setItem(hostname, (Number(result) + time));
   }
 }
+
+// chrome.browserAction.onClicked.addListener(function(tab) {
+//    chrome.tabs.executeScript(null, {file: "popup.js"});
+// });

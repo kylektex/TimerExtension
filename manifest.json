@@ -7,7 +7,7 @@
   "version": "1.0",
 
   "background": {
-    "scripts": ["content.js"],
+    "scripts": ["content.js", "popup.js"],
     "persistent": false
   },
 
@@ -20,9 +20,5 @@
    "activeTab",
    "tabs",
    "storage"
- ],
- "background": {
-    "scripts": ["content.js"],
-    "persistent": false
-  }
+ ]
 }
