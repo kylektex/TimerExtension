@@ -7,7 +7,7 @@
   "version": "1.0",
 
   "background": {
-    "scripts": ["content.js", "popup.js"],
+    "scripts": ["content.js"],
     "persistent": false
   },
 
@@ -19,6 +19,8 @@
   "permissions": [
    "activeTab",
    "tabs",
-   "storage"
+   "storage",
+   "http://*/",
+   "https://*/"
  ]
 }

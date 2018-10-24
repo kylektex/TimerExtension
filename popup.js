@@ -8,7 +8,13 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 });
 
 function hello() {
-  console.log("hello");
+  console.log("ran function 'hello'");
+  document.getElementById("currentUrl").text = "new text, hoe";
 }
-
-document.getElementById('clickme').addEventListener('click', hello);
+document.addEventListener('DOMContentLoaded', function() {
+    var link = document.getElementById('link');
+    // onClick's logic below:
+    link.addEventListener('click', function() {
+        hello();
+    });
+});
