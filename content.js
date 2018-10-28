@@ -3,16 +3,18 @@ console.log("My extension (content.js) is running");
 window.localStorage.clear();
 
 
+//get intial website
 var lastHostName;
 var timeSpent = 0;
  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
        var url = new URL(tabs[0].url);
        lastHostName = url.hostname;
-   });
+});
 
 var d = new Date();
 var startTime = d.getTime();
 
+//check when user goes to a new website
 chrome.tabs.onUpdated.addListener(function() {
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
       var url = new URL(tabs[0].url);
@@ -27,6 +29,7 @@ chrome.tabs.onUpdated.addListener(function() {
   });
 });
 
+//check when a user switches tabs
 chrome.tabs.onActivated.addListener(function() {
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     //move to function
@@ -59,8 +62,39 @@ function logTime(hostname, time) {
     console.log("updating storage item, new time is " + (Number(result) + time));
     window.localStorage.setItem(hostname, (Number(result) + time));
   }
+  console.log("logTime finished executing");
 }
 
-// chrome.browserAction.onClicked.addListener(function(tab) {
-//    chrome.tabs.executeScript(null, {file: "popup.js"});
-// });
+function checkTime() {
+  console.log("trying to check the time");
+  var checkHostName;
+  //get the most recent time
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+        var url = new URL(tabs[0].url);
+        checkHostName = url.hostname;
+
+
+        logTime(lastHostName, timeSpent);
+        lastHostName = url.hostname;
+        d = new Date();
+        timeSpent = d.getTime() - startTime;
+        startTime = d.getTime();
+
+
+        console.log("checkhostname is "+checkHostName);
+        var storageItem = window.localStorage.getItem(checkHostName);
+        console.log("storage item is "+storageItem);
+        return storageItem;
+  });
+}
+
+//listen to a request for an
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    var currentTime = checkTime();
+    console.log("checktime returned "+currentTime);
+    if (request.greeting == "hello")
+      sendResponse({answer: currentTime});
+
+
+  });
